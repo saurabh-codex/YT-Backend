@@ -14,6 +14,8 @@ const uploadOnCloudinary = async (localFilePath) => {
         (localFilePath,{
             resource_type: "auto"
         })
+        fs.unlinkSync(localFilePath)
+        return response;
     } catch (error) {
         fs.unlinkSync(localFilePath) //remoes the locally save file temp file as trh uploas operation failes
         return null
