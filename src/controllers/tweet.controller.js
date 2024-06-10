@@ -113,7 +113,7 @@ const deleteTweet = asyncHandler(async (req, res) => {
     }
 
     if(tweet.owner.toString() !== req.user._id.toString()){
-        throw new ApiError(403,"u dont ahve permission to dlt this post")
+        throw new ApiError(403,"u dont have permission to dlt this post")
     }
 
     const deleteTweet = await Tweet.deleteOne(req.user._id)
