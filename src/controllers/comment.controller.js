@@ -78,7 +78,7 @@ const updateComment = asyncHandler(async (req, res) => {
     const {commentId} = req.params
 
     if(!newContent || newContent?.trim() === ""){
-        throw new ApiError(400, "cpmment content is required")
+        throw new ApiError(400, "comment content is required")
     }
 
     if(!isValidObjectId(commentId)){
@@ -134,14 +134,14 @@ const deleteComment = asyncHandler(async (req, res) => {
         throw new ApiError(403,"u dont have permission to dlt this comment")
     }
 
-    const deleteComment = await Comment.deleteOne(req.user._id)
+    const deletedComment = await Comment.findByIdAndDelete(commentId)
 
-    if(!deleteComment){
+    if(!deletedComment){
         throw new ApiError(500, "SWW while deleting comment")
     }
 
     return res.status(201)
-    .json(new ApiResponse(200, deleteComment, "comment deleted successfully"))
+    .json(new ApiResponse(200, deletedComment, "comment deleted successfully"))
 })
 
 export {

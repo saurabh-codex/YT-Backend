@@ -116,14 +116,14 @@ const deleteTweet = asyncHandler(async (req, res) => {
         throw new ApiError(403,"u dont have permission to dlt this post")
     }
 
-    const deleteTweet = await Tweet.deleteOne(req.user._id)
+    const deletedTweet = await Tweet.findByIdAndDelete(tweetId)
 
-    if(!deleteTweet){
+    if(!deletedTweet){
         throw new ApiError(500, "SWW while deleting tweet")
     }
 
-    return res.status(201)
-    .json(new ApiResponse(200, deleteTweet, "tweet deleted successfully"))
+    return res.status(200)
+    .json(new ApiResponse(200, deletedTweet, "tweet deleted successfully"))
 })
 
 export {

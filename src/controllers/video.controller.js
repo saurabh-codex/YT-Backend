@@ -48,23 +48,18 @@ const getAllVideos = asyncHandler(async (req, res) => {
     {
       $limit: parseInt(limit),
     },
-
   ]);
 
-
-  Video.aggregatePaginate(getAllVideosAggregate,{page,limit})
-  .then((result) => {
-    return res
-    .status(200)
-    .json(
-        new ApiResponse(200, result, "fetched all videos success")
-    )
-  })
-  .catch((error) =>{
-    console.log("getting error while fetching all videos", error);
-    throw error
-  })
-
+  Video.aggregatePaginate(getAllVideosAggregate, { page, limit })
+    .then((result) => {
+      return res
+        .status(200)
+        .json(new ApiResponse(200, result, "fetched all videos success"));
+    })
+    .catch((error) => {
+      console.log("getting error while fetching all videos", error);
+      throw error;
+    });
 });
 
 const publishAVideo = asyncHandler(async (req, res) => {
